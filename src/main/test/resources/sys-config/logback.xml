@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false">
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender" target="System.err">
+        <encoder>
+            <Pattern>%date [%thread] %-5level %logger{80}#%line - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>../mylogs/log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>../mylogs/log.%i.log</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>50</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>3MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date [%thread] %-5level %logger{80}#%line - %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="console"/> <!-- 控制台输出 -->
+        <appender-ref ref="file"/> <!-- 文件输出 -->
+    </root>
+    <logger name="io" level="ERROR"/>
+    <logger name="com.mchange" level="ERROR"/>
+    <logger name="org.quartz" level="ERROR"/>
+    <logger name="com.kaka" level="INFO"/>
+    <logger name="org.eclipse" level="ERROR"/>
+</configuration>
